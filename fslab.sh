@@ -21,7 +21,7 @@ addUsecases() {
 
     #1. Remove Kafka & stop IIS Server
     kubectl scale sts zookeeper --replicas=0 -n zen
-	kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
+    kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
 	
 
     #2 Timesync Error
@@ -36,12 +36,12 @@ addUsecases() {
     #docker load < mongo.tar
     #docker rm mycluster.icp:8500/zen/mongodb:4.0.1-debian-9 
  
- 	yes | gluster volume stop image-manager
-	kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
+    yes | gluster volume stop image-manager
+    kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
 	
-	#4 Turn down DDE related PVCs
-	ddepvc = $(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
-	yes | gluster volume stop $ddepvc
+    #4 Turn down DDE related PVCs
+    ddepvc = $(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
+    yes | gluster volume stop $ddepvc
 	
     sleep 2m
 
@@ -58,19 +58,19 @@ fixUsecases() {
     systemctl start ntp;timedatectl set-ntp yes
     service ntpd stop;ntpdate pool.ntp.org;service ntpd start
 	
-	#3 Turn up the image manager volume
-	 gluster volume start  image-manager
-	 kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
+    #3 Turn up the image manager volume
+    gluster volume start  image-manager
+    kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
 	
-	#4 Turn up DDE Volumes
+    #4 Turn up DDE Volumes
 	
-	ddepvc=$(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
-	gluster volume start $ddepvc
+    ddepvc=$(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
+    gluster volume start $ddepvc
 	
 	 
-	#TEST gluster volume info | grep -B 4 Stopped
+    #TEST gluster volume info | grep -B 4 Stopped
 	
-	sleep 2m
+    sleep 2m
 }
 
 if [ "$1" == "help" ]; then

@@ -4,7 +4,7 @@ printUsage() {
   echo "Usage:"
   echo "$0 [OPTIONS]"
   echo -e "\n  OPTIONS:"
-  echo "       addUsecases: Introduces issues in the ICP4D cluster for students to resolve"
+  echo "       addUsecases1-4: Introduces issues in the ICP4D cluster for students to resolve"
   echo "       fixUsecases: Removes the introduced issues in the ICP4D cluster"
   echo
   exit 0
@@ -16,36 +16,50 @@ setup() {
  echo "Authenticating Kubectl, assuming this is a standaalone install"
  . /ibm/InstallPackage/icp-patch/kubectl-auth.sh localhost
 }
-
-addUsecases() {
-
+addUsecases1() {
     #1. Remove Kafka & stop IIS Server
+    echo "Preparing Usecase 1"
     kubectl scale sts zookeeper --replicas=0 -n zen
     kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
-	
-
-    #2 Timesync Error
+    sleep 2m
+    echo "Introduced Usecase 2"
+}
+addUsecases2() {
+    #2 Timesync Error 
+    echo "Preparing Usecase 2"
     systemctl stop ntp;timedatectl set-ntp no
     timedatectl set-time 00:00:00
     if [ "00" == `date +%H` ]; then 
        echo "Time is out of sync"
     fi
+    sleep 2m
+    echo "Introduced Usecase 2"
+}
+addUsecases3() {
+    #ImagepullBack Error
+    echo "Preparing Usecase 3"
+    yes | gluster volume stop image-manager
+    kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
+    sleep 2m
+    echo "Introduced Usecase 3"
+}
+addUsecases4() {
+
+    #4 PVC Related Errors
+    echo "Preparing Usecase 4"
+    ddepvc = $(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
+    yes | gluster volume stop $ddepvc
+    sleep 2m
+    echo "Introduced Usecase 4"
+}
+
+addUsecases() {
 
     #3 MONGO IMAGE PULLBACK ERROR, Turn down image-manager volume and delete mongodb
     #docker save mycluster.icp:8500/zen/mongodb:4.0.1-debian-9  > mongo.tar
     #docker load < mongo.tar
     #docker rm mycluster.icp:8500/zen/mongodb:4.0.1-debian-9 
- 
-    yes | gluster volume stop image-manager
-    kubectl delete pod $(kubectl get pods -n zen | grep mongo | awk '{print $1}')
-	
-    #4 Turn down DDE related PVCs
-    ddepvc = $(kubectl get pvc  --no-headers cognos-dde-daas -n zen  | awk '{print $3}')
-    yes | gluster volume stop $ddepvc
-	
     sleep 2m
-
-
 }
 
 fixUsecases() {
@@ -75,8 +89,14 @@ fixUsecases() {
 
 if [ "$1" == "help" ]; then
     printUsage
-elif [ "$1" == "addUsecases" ]; then
-    addUsecases
-elif [ "$1" == "addUsecases" ]; then
+elif [ "$1" == "addUsecases1" ]; then
+    addUsecases1
+elif [ "$1" == "addUsecases2" ]; then
+    addUsecases2
+elif [ "$1" == "addUsecases3" ]; then
+    addUsecases3
+elif [ "$1" == "addUsecases4" ]; then
+    addUsecases4
+elif [ "$1" == "fixUsecases" ]; then
     fixUsecases
 fi

@@ -28,15 +28,17 @@ addUsecase1() {
 
 addUsecase1Advance() {
 	zoo=$(kubectl get pods -n zen -o wide | grep zook |  awk '{print $7}')
-	kubectl scale sts zookeeper --replicas=0 -n zen
-	sleep 1
-	ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
-	sleep 1
-	gluster volume stop image-manager force
-	sleep 1
-	kubectl scale sts zookeeper --replicas=1 -n zen
-	echo Sleeping for 2 minutes for cluster to fail. 
-	sleep 2m
+        kubectl scale sts zookeeper --replicas=0 -n zen
+        sleep 30s
+        echo $zoo
+        ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
+        sleep 30s
+        yes | gluster volume stop image-manager force
+        sleep 1m
+        kubectl scale sts zookeeper --replicas=1 -n zen
+        echo Sleeping for 2 minutes for cluster to fail.
+        sleep 2m
+
 }
 addUsecases2() {
     #2 Timesync Error 
@@ -78,8 +80,12 @@ addUsecases() {
 
 fixUsecases() {
 	kubectl scale sts zookeeper --replicas=0 -n zen
-	gluster volume start  image-manager
-	kubectl scale sts zookeeper --replicas=1 -n zen
+        sleep 30s
+        gluster volume start  image-manager
+        sleep 30s
+        kubectl scale sts zookeeper --replicas=1 -n zen
+        sleep 30s
+
 }
 fixUsecasesOthers() {
 

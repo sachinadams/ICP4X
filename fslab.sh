@@ -21,7 +21,7 @@ addUsecase1() {
     #1. Remove Kafka & stop IIS Server
     echo "Preparing Usecase 1"
     kubectl scale sts zookeeper --replicas=0 -n zen
-    kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
+    #kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
     sleep 2m
     echo "Introduced Usecase 2"
 }
@@ -29,11 +29,14 @@ addUsecase1() {
 addUsecase1Advance() {
 	zoo=$(kubectl get pods -n zen -o wide | grep zook |  awk '{print $7}')
 	kubectl scale sts zookeeper --replicas=0 -n zen
+	sleep 1
 	ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
+	sleep 1
 	gluster volume stop image-manager force
+	sleep 1
 	kubectl scale sts zookeeper --replicas=1 -n zen
-	echo Sleeping for 3 minutes for cluster to fail. 
-	sleep 3m
+	echo Sleeping for 2 minutes for cluster to fail. 
+	sleep 2m
 }
 addUsecases2() {
     #2 Timesync Error 

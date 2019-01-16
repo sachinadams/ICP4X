@@ -4,7 +4,8 @@ printUsage() {
   echo "Usage:"
   echo "$0 [OPTIONS]"
   echo -e "\n  OPTIONS:"
-  echo "       addUsecases1-4: Introduces issues in the ICP4D cluster for students to resolve"
+  echo "       addUsecase1: Introduces issues in the ICP4D cluster for students to resolve"
+  echo "       addUsecase1advance: Advance version of Usecase 1"
   echo "       fixUsecases: Removes the introduced issues in the ICP4D cluster"
   echo
   exit 0
@@ -16,13 +17,23 @@ setup() {
  echo "Authenticating Kubectl, assuming this is a standaalone install"
  . /ibm/InstallPackage/icp-patch/kubectl-auth.sh localhost
 }
-addUsecases1() {
+addUsecase1() {
     #1. Remove Kafka & stop IIS Server
     echo "Preparing Usecase 1"
     kubectl scale sts zookeeper --replicas=0 -n zen
     kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server stop iis
     sleep 2m
     echo "Introduced Usecase 2"
+}
+
+addUsecase1advance() {
+	zoo=$(kubectl get pods -n zen -o wide | grep zook |  awk '{print $7}')
+	kubectl scale sts zookeeper --replicas=0 -n zen
+	ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
+	gluster volume stop image-manager force
+	kubectl scale sts zookeeper --replicas=1 -n zen
+	echo Sleeping for 3 minutes for cluster to fail. 
+	sleep 3m
 }
 addUsecases2() {
     #2 Timesync Error 
@@ -63,10 +74,15 @@ addUsecases() {
 }
 
 fixUsecases() {
+	kubectl scale sts zookeeper --replicas=0 -n zen
+	gluster volume start  image-manager
+	kubectl scale sts zookeeper --replicas=1 -n zen
+}
+fixUsecasesOthers() {
 
     #1. Remove Kafka
     kubectl scale sts zookeeper --replicas=1 -n zen
-	kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server start iis
+    #kubectl exec -n zen $(kubectl get pods -n zen | grep services |  awk '{print $1}')  --  /opt/IBM/InformationServer/wlp/bin/server start iis
 
     #2 Timesync Error
     systemctl start ntp;timedatectl set-ntp yes

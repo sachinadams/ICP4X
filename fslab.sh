@@ -5,7 +5,7 @@ printUsage() {
   echo "$0 [OPTIONS]"
   echo -e "\n  OPTIONS:"
   echo "       addUsecase1: Introduces issues in the ICP4D cluster for students to resolve"
-  echo "       addUsecase1advance: Advance version of Usecase 1"
+  echo "       addUsecase1Advance: Advance version of Usecase 1"
   echo "       fixUsecases: Removes the introduced issues in the ICP4D cluster"
   echo
   exit 0
@@ -26,7 +26,7 @@ addUsecase1() {
     echo "Introduced Usecase 2"
 }
 
-addUsecase1advance() {
+addUsecase1Advance() {
 	zoo=$(kubectl get pods -n zen -o wide | grep zook |  awk '{print $7}')
 	kubectl scale sts zookeeper --replicas=0 -n zen
 	ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
@@ -105,14 +105,10 @@ fixUsecasesOthers() {
 
 if [ "$1" == "help" ]; then
     printUsage
-elif [ "$1" == "addUsecases1" ]; then
-    addUsecases1
-elif [ "$1" == "addUsecases2" ]; then
-    addUsecases2
-elif [ "$1" == "addUsecases3" ]; then
-    addUsecases3
-elif [ "$1" == "addUsecases4" ]; then
-    addUsecases4
+elif [ "$1" == "addUsecase1" ]; then
+    addUsecase1
+elif [ "$1" == "addUsecase1Advance" ]; then
+    addUsecase1Advance
 elif [ "$1" == "fixUsecases" ]; then
     fixUsecases
 fi

@@ -1,0 +1,155 @@
+[
+  {
+    "_id": "afbe6f90-ec42-11e8-b71d-3b91ce81de42",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Collect Organize Analyze",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"d3bb3190-ec41-11e8-befa-0bc0acbae1b7\",\"panelIndex\":1,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"6833d7d0-ec35-11e8-9dce-6d12537c345f\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"columns\":[\"node.hostname\",\"kubernetes.pod\",\"log\"],\"id\":\"b44d7d50-ec31-11e8-ac9a-59291829f034\",\"panelIndex\":3,\"row\":4,\"size_x\":12,\"size_y\":4,\"sort\":[\"@timestamp\",\"desc\"],\"type\":\"search\"},{\"col\":1,\"columns\":[\"node.hostname\",\"kubernetes.pod\",\"log\"],\"id\":\"8d2f6900-ec30-11e8-ac9a-59291829f034\",\"panelIndex\":5,\"row\":12,\"size_x\":12,\"size_y\":4,\"sort\":[\"@timestamp\",\"desc\"],\"type\":\"search\"},{\"size_x\":12,\"size_y\":4,\"panelIndex\":6,\"type\":\"search\",\"id\":\"c6781ef0-ec2b-11e8-b2d9-114689fc9180\",\"col\":1,\"row\":8,\"columns\":[\"node.hostname\",\"kubernetes.pod\",\"log\"],\"sort\":[\"@timestamp\",\"desc\"]}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-1\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "c6781ef0-ec2b-11e8-b2d9-114689fc9180",
+    "_type": "search",
+    "_source": {
+      "title": "Organize",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "node.hostname",
+        "kubernetes.pod",
+        "log"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"version\":true,\"filter\":[{\"meta\":{\"index\":\"logstash-*\",\"type\":\"phrases\",\"key\":\"kubernetes.pod\",\"value\":\"audit-trail-service, cassandra, is-en-conductor, is-engine-compute, kafka, shop4info-event-consumer, shop4info-rest, shop4info-scheduler, shop4info-type-registry, solr, zen-ibm-iisee-zen-finley-ml, zen-ibm-iisee-zen-gov-app-config-service, zen-ibm-iisee-zen-gov-catalog-search-service, zen-ibm-iisee-zen-gov-enterprise-search-ui, zen-ibm-iisee-zen-gov-social-kg-bridge, zen-ibm-iisee-zen-gov-social-service, zen-ibm-iisee-zen-gov-user-prefs-service, zen-ibm-iisee-zen-gremlin-console, zen-ibm-iisee-zen-igc-ui-react, zen-ibm-iisee-zen-iis-services, zen-ibm-iisee-zen-iis-xmetarepo, zookeeper\",\"params\":[\"audit-trail-service\",\"cassandra\",\"is-en-conductor\",\"is-engine-compute\",\"kafka\",\"shop4info-event-consumer\",\"shop4info-rest\",\"shop4info-scheduler\",\"shop4info-type-registry\",\"solr\",\"zen-ibm-iisee-zen-finley-ml\",\"zen-ibm-iisee-zen-gov-app-config-service\",\"zen-ibm-iisee-zen-gov-catalog-search-service\",\"zen-ibm-iisee-zen-gov-enterprise-search-ui\",\"zen-ibm-iisee-zen-gov-social-kg-bridge\",\"zen-ibm-iisee-zen-gov-social-service\",\"zen-ibm-iisee-zen-gov-user-prefs-service\",\"zen-ibm-iisee-zen-gremlin-console\",\"zen-ibm-iisee-zen-igc-ui-react\",\"zen-ibm-iisee-zen-iis-services\",\"zen-ibm-iisee-zen-iis-xmetarepo\",\"zookeeper\"],\"negate\":false,\"disabled\":false,\"alias\":\"Organize\"},\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"kubernetes.pod\":\"audit-trail-service\"}},{\"match_phrase\":{\"kubernetes.pod\":\"cassandra\"}},{\"match_phrase\":{\"kubernetes.pod\":\"is-en-conductor\"}},{\"match_phrase\":{\"kubernetes.pod\":\"is-engine-compute\"}},{\"match_phrase\":{\"kubernetes.pod\":\"kafka\"}},{\"match_phrase\":{\"kubernetes.pod\":\"shop4info-event-consumer\"}},{\"match_phrase\":{\"kubernetes.pod\":\"shop4info-rest\"}},{\"match_phrase\":{\"kubernetes.pod\":\"shop4info-scheduler\"}},{\"match_phrase\":{\"kubernetes.pod\":\"shop4info-type-registry\"}},{\"match_phrase\":{\"kubernetes.pod\":\"solr\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-finley-ml\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-app-config-service\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-catalog-search-service\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-enterprise-search-ui\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-social-kg-bridge\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-social-service\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gov-user-prefs-service\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-gremlin-console\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-igc-ui-react\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-iis-services\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-iisee-zen-iis-xmetarepo\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zookeeper\"}}],\"minimum_should_match\":1}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "8d2f6900-ec30-11e8-ac9a-59291829f034",
+    "_type": "search",
+    "_source": {
+      "title": "Analyze",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "node.hostname",
+        "kubernetes.pod",
+        "log"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"version\":true,\"filter\":[{\"meta\":{\"index\":\"logstash-*\",\"type\":\"phrases\",\"key\":\"kubernetes.pod\",\"value\":\"sparkgx, rstudio, zeppelin, zen-scripted-data-python, sparkaas-api-deploy, spark-worker, spark-history-server, slmtagcronjob, repository, redis, r-publish-content, portal-machine-learning, pipeline|, mlscoring, ml-pipelines-api, jupyter-server, jupyter-notebooks-nbviewer, dsx-scripted-ml-python, dsx-core, dd-wmq, dd-scenario-ui, dd-scenario-api, dd-cognitive, dash-front-deploy, cloudant\",\"params\":[\"sparkgx\",\"rstudio\",\"zeppelin\",\"zen-scripted-data-python\",\"sparkaas-api-deploy\",\"spark-worker\",\"spark-history-server\",\"slmtagcronjob\",\"repository\",\"redis\",\"r-publish-content\",\"portal-machine-learning\",\"pipeline|\",\"mlscoring\",\"ml-pipelines-api\",\"jupyter-server\",\"jupyter-notebooks-nbviewer\",\"dsx-scripted-ml-python\",\"dsx-core\",\"dd-wmq\",\"dd-scenario-ui\",\"dd-scenario-api\",\"dd-cognitive\",\"dash-front-deploy\",\"cloudant\"],\"negate\":false,\"disabled\":false,\"alias\":\"Analyze\"},\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"kubernetes.pod\":\"sparkgx\"}},{\"match_phrase\":{\"kubernetes.pod\":\"rstudio\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zeppelin\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-scripted-data-python\"}},{\"match_phrase\":{\"kubernetes.pod\":\"sparkaas-api-deploy\"}},{\"match_phrase\":{\"kubernetes.pod\":\"spark-worker\"}},{\"match_phrase\":{\"kubernetes.pod\":\"spark-history-server\"}},{\"match_phrase\":{\"kubernetes.pod\":\"slmtagcronjob\"}},{\"match_phrase\":{\"kubernetes.pod\":\"repository\"}},{\"match_phrase\":{\"kubernetes.pod\":\"redis\"}},{\"match_phrase\":{\"kubernetes.pod\":\"r-publish-content\"}},{\"match_phrase\":{\"kubernetes.pod\":\"portal-machine-learning\"}},{\"match_phrase\":{\"kubernetes.pod\":\"pipeline|\"}},{\"match_phrase\":{\"kubernetes.pod\":\"mlscoring\"}},{\"match_phrase\":{\"kubernetes.pod\":\"ml-pipelines-api\"}},{\"match_phrase\":{\"kubernetes.pod\":\"jupyter-server\"}},{\"match_phrase\":{\"kubernetes.pod\":\"jupyter-notebooks-nbviewer\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dsx-scripted-ml-python\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dsx-core\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dd-wmq\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dd-scenario-ui\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dd-scenario-api\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dd-cognitive\"}},{\"match_phrase\":{\"kubernetes.pod\":\"dash-front-deploy\"}},{\"match_phrase\":{\"kubernetes.pod\":\"cloudant\"}}],\"minimum_should_match\":1}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "b44d7d50-ec31-11e8-ac9a-59291829f034",
+    "_type": "search",
+    "_source": {
+      "title": "Collect",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "node.hostname",
+        "kubernetes.pod",
+        "log"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"version\":true,\"filter\":[{\"meta\":{\"index\":\"logstash-*\",\"type\":\"phrases\",\"key\":\"kubernetes.pod\",\"value\":\"ibm-nginx, spawner-api, usermgmt, utils-api, wml-ingestion, zen-content, zen-core-api, zen-core, zen-daas-cdn, zen-daas-proxy, zen-database-core, zen-databases, zen-ibm-db2oltp-aese, zen-metastoredb, zen-mongodb, zen-redis\",\"params\":[\"ibm-nginx\",\"spawner-api\",\"usermgmt\",\"utils-api\",\"wml-ingestion\",\"zen-content\",\"zen-core-api\",\"zen-core\",\"zen-daas-cdn\",\"zen-daas-proxy\",\"zen-database-core\",\"zen-databases\",\"zen-ibm-db2oltp-aese\",\"zen-metastoredb\",\"zen-mongodb\",\"zen-redis\"],\"negate\":false,\"disabled\":false,\"alias\":\"Collect\"},\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"kubernetes.pod\":\"ibm-nginx\"}},{\"match_phrase\":{\"kubernetes.pod\":\"spawner-api\"}},{\"match_phrase\":{\"kubernetes.pod\":\"usermgmt\"}},{\"match_phrase\":{\"kubernetes.pod\":\"utils-api\"}},{\"match_phrase\":{\"kubernetes.pod\":\"wml-ingestion\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-content\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-core-api\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-core\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-daas-cdn\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-daas-proxy\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-database-core\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-databases\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-ibm-db2oltp-aese\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-metastoredb\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-mongodb\"}},{\"match_phrase\":{\"kubernetes.pod\":\"zen-redis\"}}],\"minimum_should_match\":1}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "0ec7b130-ec35-11e8-9dce-6d12537c345f",
+    "_type": "search",
+    "_source": {
+      "title": "log",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"version\":true,\"filter\":[{\"meta\":{\"index\":\"logstash-*\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"exists\",\"key\":\"log\",\"value\":\"exists\"},\"exists\":{\"field\":\"log\"},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"index\":\"logstash-*\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"kubernetes.namespace\",\"value\":\"zen\"},\"query\":{\"match\":{\"kubernetes.namespace\":{\"query\":\"zen\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "e574f470-ecf5-11e8-ac8e-d374efc48540",
+    "_type": "search",
+    "_source": {
+      "title": "Display All Zen Logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"version\":true,\"filter\":[],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "d3bb3190-ec41-11e8-befa-0bc0acbae1b7",
+    "_type": "visualization",
+    "_source": {
+      "title": "Histogram",
+      "visState": "{\"title\":\"Histogram\",\"type\":\"histogram\",\"params\":{\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{\"text\":\"@timestamp per 30 seconds\"}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Count\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"Count\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "0ec7b130-ec35-11e8-9dce-6d12537c345f",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "6833d7d0-ec35-11e8-9dce-6d12537c345f",
+    "_type": "visualization",
+    "_source": {
+      "title": "Piechart",
+      "visState": "{\"title\":\"Piechart\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"kubernetes.pod.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "0ec7b130-ec35-11e8-9dce-6d12537c345f",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]

@@ -4,7 +4,7 @@ printUsage() {
   echo "Usage:"
   echo "$0 [OPTIONS]"
   echo -e "\n  OPTIONS:"
-  echo "       addUsecase1: Introduces issues in the ICP4D cluster for students to resolve"
+  #echo "       addUsecase1: Introduces issues in the ICP4D cluster for students to resolve"
   echo "       addUsecase1Advance: Advance version of Usecase 1"
   echo "       fixUsecases: Removes the introduced issues in the ICP4D cluster"
   echo

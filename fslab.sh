@@ -27,16 +27,26 @@ addUsecase1() {
 }
 
 addUsecase1Advance() {
+        echo "Please dont terminate the process....It will take around couple of minutes"
 	zoo=$(kubectl get pods -n zen -o wide | grep zook |  awk '{print $7}')
-        kubectl scale sts zookeeper --replicas=0 -n zen
+	
+        kubectl scale sts zookeeper --replicas=0 -n zen > /dev/null 2>&1
+	echo "Step 1 Complete"
         sleep 30s
-        echo $zoo
-        ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11"
-        sleep 30s
-        yes | gluster volume stop image-manager force
-        sleep 1m
-        kubectl scale sts zookeeper --replicas=1 -n zen
-        echo Sleeping for 2 minutes for cluster to fail.
+   
+        ssh $zoo "docker rmi  mycluster.icp:8500/zen/zookeeper:3.4.11" > /dev/null 2>&1
+        echo "Step 2  Complete"
+	sleep 30s
+	
+	
+        yes | gluster volume stop image-manager force > /dev/null 2>&1
+        echo "Step 3 Complete"
+	sleep 1m
+	
+	
+        kubectl scale sts zookeeper --replicas=1 -n zen > /dev/null 2>&1
+	echo "Step 4 Complete"
+        echo "Sleeping for 2 minutes for cluster to fail."
         sleep 2m
 
 }
